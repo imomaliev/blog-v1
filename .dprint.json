@@ -1,0 +1,12 @@
+{
+    // https://dprint.dev/config/
+    "lineWidth": 88,
+    "indentWidth": 4,
+    "plugins": ["https://plugins.dprint.dev/toml-0.5.4.wasm"],
+    "includes": ["**/*"],
+    "excludes": ["**/.venv"],
+    // https://dprint.dev/plugins/toml/config/
+    "toml": {
+        "associations": ["**/Pipfile"]
+    }
+}
