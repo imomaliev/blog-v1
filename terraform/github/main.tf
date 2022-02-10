@@ -28,5 +28,8 @@ resource "github_repository" "project" {
 resource "github_branch_protection" "main" {
   repository_id          = github_repository.project.node_id
   pattern                = "main"
+  enforce_admins         = true
   require_signed_commits = true
+  allows_force_pushes    = false
+  allows_deletions       = false
 }
