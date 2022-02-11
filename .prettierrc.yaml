@@ -1,3 +1,18 @@
 # https://prettier.io/docs/en/options.html
-tabWidth: 4
-printWidth: 88
+overrides:
+    - files:
+          - "*.yaml"
+          - "*.yml"
+          - "*.md"
+          - "*.json"
+      options:
+          tabWidth: 4
+          printWidth: 88
+    # https://github.com/NiklasPor/prettier-plugin-go-template
+    - files:
+          - "blog/layouts/**/*.html"
+          - "blog/themes/*/layouts/**/*.html"
+      options:
+          parser: go-template
+          tabWidth: 4
+          printWidth: 88
