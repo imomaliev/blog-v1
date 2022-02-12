@@ -5,7 +5,7 @@ draft: true
 tags: []
 ---
 
-# "{{ replace .Name "-" " " | title }}"
+# {{ replace .Name "-" " " | title }}
 
 ## Story
 
