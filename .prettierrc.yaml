@@ -10,8 +10,8 @@ overrides:
           printWidth: 88
     # https://github.com/NiklasPor/prettier-plugin-go-template
     - files:
-          - "blog/layouts/**/*.html"
-          - "blog/themes/*/layouts/**/*.html"
+          - "blog/src/layouts/**/*.html"
+          - "blog/src/themes/*/layouts/**/*.html"
       options:
           parser: go-template
           tabWidth: 4

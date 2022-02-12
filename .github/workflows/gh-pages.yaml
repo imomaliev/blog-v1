@@ -23,8 +23,8 @@ jobs:
                   # extended: true
 
             - name: Build
-              working-directory: "./blog"
-              run: hugo --minify
+              working-directory: "./blog/"
+              run: hugo --minify --source src
 
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v3
