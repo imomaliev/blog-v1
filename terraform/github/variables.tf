@@ -18,7 +18,7 @@ variable "project_description" {
 variable "project_url" {
   description = "Homepage url"
   type        = string
-  default     = "https://imomaliev.github.com/blog"
+  default     = "https://imomaliev.github.io/blog"
 }
 
 variable "project_license" {

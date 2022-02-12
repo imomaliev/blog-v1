@@ -2,7 +2,7 @@
 title: "Centos Linux Ends In 2021"
 date: 2021-02-27T20:53:56+07:00
 draft: false
-tags: ["RHEL"]
+tags: ["rhel"]
 ---
 
 # CentOS Linux project ends in 2021

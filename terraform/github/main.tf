@@ -19,6 +19,15 @@ resource "github_repository" "project" {
   vulnerability_alerts   = true
   # TODO: add a way to setup https://docs.github.com/en/rest/reference/repos#enable-automated-security-fixes
 
+  # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository#github-pages-configuration
+  pages {
+    source {
+      branch = "gh-pages"
+      path   = "/"
+    }
+  }
+
+  # https://www.terraform.io/language/meta-arguments/lifecycle
   lifecycle {
     prevent_destroy = true
   }
