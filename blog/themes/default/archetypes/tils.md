@@ -12,3 +12,7 @@ tags: []
 ## Question
 
 ## Answer
+
+## What I Learned
+
+## Links

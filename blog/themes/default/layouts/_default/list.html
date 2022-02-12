@@ -3,7 +3,13 @@
     {{ range .Pages }}
         <article>
             <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-            <p>{{ .Summary }}</p>
+            <ul>
+                {{ range .Params.tags }}
+                    <li>
+                        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}">{{ . }}</a>
+                    </li>
+                {{ end }}
+            </ul>
         </article>
     {{ end }}
 {{ end }}
