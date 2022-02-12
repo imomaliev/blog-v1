@@ -1,11 +1,11 @@
-baseURL = 'http://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = "https://blog.imomaliev.com/"
+languageCode = "en-us"
+title = "Blog"
 theme = "default"
 
 [menu]
 [[menu.main]]
-identifier = 'tils'
-name = 'TILs'
-title = 'TILs'
-url = '/tils/'
+identifier = "tils"
+name = "TILs"
+title = "TILs"
+url = "/tils/"
