@@ -1,0 +1,63 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<link rel=icon href=/favicon.ico>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Blog</title>
+<link rel=stylesheet href="https://imomaliev.github.io/blog/css/main.min.44805a50e0c450de92692522bbd710b9b90fd2abda14fd4306edc32c26744d4e.css">
+</head>
+<body><header>
+<nav class=nav>
+<ul>
+<a class=nav-item href=https://imomaliev.github.io/blog/>Blog</a>
+|
+<a class=nav-item href=/blog/tils/ title=TILs>TILs</a>
+</ul>
+</nav>
+</header>
+<div id=content>
+<article>
+<h1>TailwindCSS Custom Transform Before Exctraction</h1>
+<h2 id=story>Story</h2>
+<p>I was trying to make <a href=https://gohugo.io/><code>Hugo</code></a> work correctly with
+<a href=https://tailwindcss.com/><code>TailwindCSS</code></a> <code>3.x</code> which now uses <code>jit</code> by default and
+this causes to changes in classes in template files by ignored by <code>Hugo</code>&rsquo;s
+<a href=https://gohugo.io/hugo-pipes/introduction/>pipes</a>. In previous versions, this was
+possible by adding new
+<a href=https://gohugo.io/hugo-pipes/postprocess/#css-purging-with-postcss><code>extractor</code></a>
+to <code>tailwind.config.js</code>. In the end, this solution was a dead end for my issue. But for
+future reference, I thought I should create an example for myself.</p>
+<h2 id=question>Question</h2>
+<p>How to add custom <code>content.trasnform</code> to <code>tailwind.config.js</code></p>
+<h2 id=answer>Answer</h2>
+<p>From <a href=https://tailwindcss.com/docs/content-configuration#transforming-source-files>docs</a>:</p>
+<blockquote>
+<p>When using <code>content.transform</code>, you’ll need to provide your source paths using
+<code>content.files</code> instead of as a top-level array under content.</p>
+</blockquote>
+<p>Following example from
+<a href=https://gohugo.io/hugo-pipes/postprocess/#css-purging-with-postcss>CSS purging with PostCSS</a>
+we could do following</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff><span style=color:#a6e22e>+    content: {
+</span><span style=color:#a6e22e>+        files: [&#34;./src/layouts/**/*.{html,js}&#34;, &#34;./src/hugo_stats.json&#34;],
+</span><span style=color:#a6e22e>+        transform: {
+</span><span style=color:#a6e22e>+            json: (content) =&gt; {
+</span><span style=color:#a6e22e>+                let els = JSON.parse(content).htmlElements;
+</span><span style=color:#a6e22e>+                return `${els.classes.join(&#34; &#34;)}`;
+</span><span style=color:#a6e22e>+            },
+</span><span style=color:#a6e22e>+        },
+</span><span style=color:#a6e22e>+    },
+</span></code></pre></div><h2 id=what-i-learned>What I Learned</h2>
+<p>In the beginning I thought it would be possible to same trick with
+<a href=https://tailwindcss.com/docs/content-configuration#customizing-extraction-logic><code>content.extract</code></a>
+but it turns out, <code>extract</code> process content line by line. This is why, for <code>TailwindCSS >= 3.x</code> we should use <code>content.transform</code> which runs on whole file.</p>
+<h2 id=links>Links</h2>
+<ul>
+<li><a href=https://gohugo.io/hugo-pipes/introduction/>https://gohugo.io/hugo-pipes/introduction/</a></li>
+<li><a href=https://gohugo.io/hugo-pipes/postprocess/#css-purging-with-postcss>https://gohugo.io/hugo-pipes/postprocess/#css-purging-with-postcss</a></li>
+<li><a href=https://tailwindcss.com/docs/content-configuration#transforming-source-files>https://tailwindcss.com/docs/content-configuration#transforming-source-files</a></li>
+<li><a href=https://tailwindcss.com/docs/content-configuration#customizing-extraction-logic>https://tailwindcss.com/docs/content-configuration#customizing-extraction-logic</a></li>
+</ul>
+</article>
+</div></body>
+</html>
