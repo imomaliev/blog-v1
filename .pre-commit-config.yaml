@@ -20,7 +20,7 @@ repos:
       rev: v2.5.1
       hooks:
           - id: prettier
-            types_or: [yaml, markdown, json, html]
+            types_or: [yaml, markdown, json, html, javascript]
             additional_dependencies:
                 - "prettier@2.5.1"
                 - "prettier-plugin-go-template@0.0.11"
