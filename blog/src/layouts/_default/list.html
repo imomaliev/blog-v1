@@ -1,12 +1,18 @@
 {{ define "main" }}
-    <h1>{{ .Title }}</h1>
+    <h1 class="text-5xl font-bold">{{ .Title }}</h1>
     {{ range .Pages }}
         <article>
-            <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+            <h2 class="text-4xl underline">
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h2>
             <ul>
                 {{ range .Params.tags }}
-                    <li>
-                        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}">{{ . }}</a>
+                    <li class="inline">
+                        <a
+                            class="text-blue-600 underline"
+                            href="{{ "/tags/" | relURL }}{{ . | urlize }}"
+                            >{{ . }}</a
+                        >
                     </li>
                 {{ end }}
             </ul>
