@@ -1,0 +1,31 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8>
+<link rel=icon href=/favicon.ico>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Blog</title>
+<link rel=stylesheet href=https://imomaliev.github.io/blog/css/main.css>
+</head>
+<body><header>
+<nav class=nav>
+<ul>
+<a class=nav-item href=https://imomaliev.github.io/blog/>Blog</a>
+|
+<a class=nav-item href=/blog/tils/ title=TILs>TILs</a>
+</ul>
+</nav>
+</header>
+<div id=content>
+<article>
+<h1>Npm Build Behaves Differently</h1>
+<h2 id=question>Question</h2>
+<p>I was pulling my hair out trying to understand why inside docker npm bulid is behaving differently.</p>
+<h2 id=answer>Answer</h2>
+<p>Issue was due to docker container was not seeing the same files as local <code>npm build</code>. I forgot to mount some files! We are using <code>postcss</code> for tailwind in one of our projects. There is a feature called <code>tree-shaking</code> which is during build deletes all unused styles from final bundle. So&mldr; Because I forgot to make some of our templates visiable to frontend container postcss thought that styles were not used and purged them.</p>
+<h2 id=what-i-learned>What I Learned</h2>
+<ol>
+<li>When reading configuration files do not rush and reread carefully. In our <code>tailwind.config.js</code> it is directly stated that this files are going to be used for purging.</li>
+<li>May there should be some type of error handling for such cases. When <code>tailwind</code> expects some files for purging but they are not persent, throw a warning.</li>
+</ol>
+</article>
+</div></body>
+</html>

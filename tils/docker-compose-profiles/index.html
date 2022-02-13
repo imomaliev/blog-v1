@@ -1,0 +1,26 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8>
+<link rel=icon href=/favicon.ico>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Blog</title>
+<link rel=stylesheet href=https://imomaliev.github.io/blog/css/main.css>
+</head>
+<body><header>
+<nav class=nav>
+<ul>
+<a class=nav-item href=https://imomaliev.github.io/blog/>Blog</a>
+|
+<a class=nav-item href=/blog/tils/ title=TILs>TILs</a>
+</ul>
+</nav>
+</header>
+<div id=content>
+<article>
+<h1>Docker Compose Profiles</h1>
+<h2 id=question>Question</h2>
+<p>I was trying to have smart separtion between different development environments for our project. Fox example only run selected services when developing frontend locally, or run different set of services when developing backend locally.</p>
+<h2 id=answer>Answer</h2>
+<p>For now we are using <code>docker-compose.override.yml</code>. But I found out there is <code>profiles</code> directive <a href=https://github.com/compose-spec/compose-spec/blob/master/spec.md#profiles>https://github.com/compose-spec/compose-spec/blob/master/spec.md#profiles</a></p>
+</article>
+</div></body>
+</html>

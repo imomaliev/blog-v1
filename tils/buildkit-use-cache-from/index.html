@@ -1,0 +1,37 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8>
+<link rel=icon href=/favicon.ico>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Blog</title>
+<link rel=stylesheet href=https://imomaliev.github.io/blog/css/main.css>
+</head>
+<body><header>
+<nav class=nav>
+<ul>
+<a class=nav-item href=https://imomaliev.github.io/blog/>Blog</a>
+|
+<a class=nav-item href=/blog/tils/ title=TILs>TILs</a>
+</ul>
+</nav>
+</header>
+<div id=content>
+<article>
+<h1>Buildkit Use Cache From</h1>
+<h2 id=question>Question</h2>
+<p>I&rsquo;ve recently updated our CI to use buildkit for building docker images. But I noticed that docker build command with &ndash;cache-from buildkit image is not reusing cache.</p>
+<h2 id=answer>Answer</h2>
+<p>We need to provide <code>--build-arg BUILDKIT_INLINE_CACHE=1</code> for <code>docker build</code> command so that cache metadata will written into image</p>
+<p>From docs</p>
+<blockquote>
+<p>In addition to local build cache, the builder can reuse the cache generated from previous builds with the &ndash;cache-from flag pointing to an image in the registry.</p>
+<p>To use an image as a cache source, cache metadata needs to be written into the image on creation. This can be done by setting &ndash;build-arg BUILDKIT_INLINE_CACHE=1 when building the image. After that, the built image can be used as a cache source for subsequent builds.</p>
+</blockquote>
+<h2 id=links>Links</h2>
+<ul>
+<li><a href=https://devops.stackexchange.com/questions/11175/build-docker-images-with-dind-and-buildkit>https://devops.stackexchange.com/questions/11175/build-docker-images-with-dind-and-buildkit</a></li>
+<li><a href=https://docs.docker.com/engine/reference/commandline/build/#specifying-external-cache-sources>https://docs.docker.com/engine/reference/commandline/build/#specifying-external-cache-sources</a></li>
+<li><a href=https://testdriven.io/blog/faster-ci-builds-with-docker-cache/#buildkit>https://testdriven.io/blog/faster-ci-builds-with-docker-cache/#buildkit</a></li>
+</ul>
+</article>
+</div></body>
+</html>

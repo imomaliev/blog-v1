@@ -1,0 +1,36 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8>
+<link rel=icon href=/favicon.ico>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Blog</title>
+<link rel=stylesheet href=https://imomaliev.github.io/blog/css/main.css>
+</head>
+<body><header>
+<nav class=nav>
+<ul>
+<a class=nav-item href=https://imomaliev.github.io/blog/>Blog</a>
+|
+<a class=nav-item href=/blog/tils/ title=TILs>TILs</a>
+</ul>
+</nav>
+</header>
+<div id=content>
+<article>
+<h1>Disable Healthcheck</h1>
+<h2 id=question>Question</h2>
+<p>When running <code>pdb</code> with enabled <code>healthcheck</code> it gets really annoying because during your debug session you keep getting healthcheck requests</p>
+<h2 id=answer>Answer</h2>
+<h3 id=docker>Docker</h3>
+<p>Use <code>--no-healthcheck</code> (<a href=https://docs.docker.com/engine/reference/run/#healthcheck>https://docs.docker.com/engine/reference/run/#healthcheck</a>)</p>
+<blockquote>
+<p>&ndash;no-healthcheck Disable any container-specified HEALTHCHECK</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console>$ docker run --no-healthcheck
+</code></pre></div><h3 id=docker-compose>docker-compose</h3>
+<p>Use <code>disable: true</code> (<a href=https://github.com/compose-spec/compose-spec/blob/master/spec.md#healthcheck>https://github.com/compose-spec/compose-spec/blob/master/spec.md#healthcheck</a>)</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>healthcheck</span>:
+    <span style=color:#f92672>disable</span>: <span style=color:#66d9ef>true</span>
+</code></pre></div>
+</article>
+</div></body>
+</html>
