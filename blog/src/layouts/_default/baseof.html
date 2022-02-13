@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-    {{- partial "head.html" . -}}
+    {{/* FIXME: This will greatly speedup build times in development which is */}}
+    {{/* required due to hack for re-building assets */}}
+    {{/* https://github.com/gohugoio/hugo/issues/8343#issuecomment-1019383325 */}}
+    {{- partialCached "head.html" . -}}
     <body>
         {{- partial "header.html" . -}}
         <div id="content">
