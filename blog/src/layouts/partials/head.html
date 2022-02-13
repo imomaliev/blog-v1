@@ -3,4 +3,6 @@
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ .Site.Title }}</title>
+    {{ $css := resources.Get "css/main.css" | resources.PostCSS }}
+    <link rel="stylesheet" href="{{ $css.Permalink }}" />
 </head>

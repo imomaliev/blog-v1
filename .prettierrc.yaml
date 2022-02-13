@@ -5,6 +5,7 @@ overrides:
           - "*.yml"
           - "*.md"
           - "*.json"
+          - "*.js"
       options:
           tabWidth: 4
           printWidth: 88
