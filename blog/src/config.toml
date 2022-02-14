@@ -2,6 +2,10 @@ baseURL = "https://imomaliev.github.io/blog/"
 languageCode = "en-us"
 title = "Blog"
 
+[build]
+# Used for fingerprinting styles in development to work with TailwindCSS's jit
+writeStats = true
+
 [menu]
 [[menu.main]]
 identifier = "tils"

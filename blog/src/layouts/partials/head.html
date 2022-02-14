@@ -7,9 +7,10 @@
     {{/* https://github.com/gohugoio/hugo/issues/8343#issuecomment-1019383325 */}}
     {{- $css := resources.Get "css/main.css" | resources.PostCSS }}
     {{- if hugo.IsProduction }}
-        {{- $css = $css | resources.Minify | resources.Fingerprint | resources.PostProcess }}
-    {{- else if .Site.IsServer }}
-        {{- $css = $css | resources.ExecuteAsTemplate (printf "main.%v.css" now.UnixMilli) . }}
+        {{- $css = $css | minify | fingerprint | resources.PostProcess }}
+    {{- else if (and (.Site.IsServer) (fileExists "hugo_stats.json")) }}
+        {{- $stats_hash := getJSON "hugo_stats.json" | printf "%v" | sha256 }}
+        {{- $css = $css | resources.ExecuteAsTemplate (printf "main.%v.css" $stats_hash) . }}
     {{- end }}
     <link rel="stylesheet" href="{{ $css.Permalink }}" />
 </head>
