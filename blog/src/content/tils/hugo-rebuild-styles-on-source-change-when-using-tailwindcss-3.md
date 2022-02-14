@@ -1,11 +1,11 @@
 ---
-title: "Rebuild Styles on Source Change in Hugo With TailwindCSS 3.x"
+title: "Hugo | Rebuild Styles on Source Change when using TailwindCSS 3.x"
 date: 2022-02-14T17:54:27+07:00
 draft: false
 tags: ["hugo", "postcss", "tailwindcss"]
 ---
 
-# Rebuild Styles on Source Change in Hugo With TailwindCSS 3.x
+# Hugo | Rebuild Styles on Source Change when using TailwindCSS 3.x
 
 ## Story
 
@@ -88,3 +88,4 @@ For some reason, reading `hugo_stats.json` with [`readFile`](https://gohugo.io/f
 -   https://gohugo.io/functions/partialcached/
 -   https://gohugo.io/getting-started/configuration/#configure-build
 -   https://gohugo.io/functions/readfile/
+-   https://dev.to/jonas_duri/how-to-use-tailwindcss-30-without-external-npm-scripts-just-hugo-pipes-2lg9
