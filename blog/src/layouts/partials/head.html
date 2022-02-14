@@ -3,7 +3,7 @@
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ .Site.Title }}</title>
-    {{/* FIXME: Using hack for automatically re-building assets in development */}}
+    {{/* FIXME: Using hack for automatically rebuilding assets in development */}}
     {{/* https://github.com/gohugoio/hugo/issues/8343#issuecomment-1019383325 */}}
     {{- $css := resources.Get "css/main.css" | resources.PostCSS }}
     {{- if hugo.IsProduction }}
