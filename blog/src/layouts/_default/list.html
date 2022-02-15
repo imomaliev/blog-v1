@@ -3,7 +3,7 @@
     {{ range .Pages }}
         <article>
             <h2 class="text-4xl underline">
-                <a href="{{ .Permalink }}">{{ .Title }}</a>
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
             </h2>
             <ul>
                 {{ range .Params.tags }}
