@@ -1,0 +1,48 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<link rel=icon href=/favicon.ico>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Blog</title>
+<link rel=stylesheet href="/blog/css/main.min.076f25f16802c9ec06660a6a121a92d29518837ffb3f3129a7f2a1e7ed8ae34c.css">
+</head>
+<body><header>
+<nav class=nav>
+<ul>
+<a class=nav-item href=https://imomaliev.github.io/blog/>Blog</a>
+|
+<a class=nav-item href=/blog/tils/ title=TILs>TILs</a>
+</ul>
+</nav>
+</header>
+<div id=content>
+<article>
+<h1 class="text-5xl font-bold">Tornado | Fix "tornado.util.TimeoutError: Operation timed out after 5 seconds"</h1>
+<h2 id=story>Story</h2>
+<p>Whenever I debug my test for tornado code in the end I get this error</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>...</span>
+<span style=color:#f92672>&gt;</span> <span style=color:#66d9ef>raise</span> <span style=color:#a6e22e>TimeoutError</span>(<span style=color:#e6db74>&#39;Operation timed out after </span><span style=color:#e6db74>%s</span><span style=color:#e6db74> seconds&#39;</span> <span style=color:#f92672>%</span> timeout)
+E tornado<span style=color:#f92672>.</span>util<span style=color:#f92672>.</span>TimeoutError: Operation timed out after <span style=color:#ae81ff>5</span> seconds
+
+<span style=color:#f92672>.</span>venv<span style=color:#f92672>/</span>lib<span style=color:#f92672>/</span>python3<span style=color:#ae81ff>.7</span><span style=color:#f92672>/</span>site<span style=color:#f92672>-</span>packages<span style=color:#f92672>/</span>tornado<span style=color:#f92672>/</span>ioloop<span style=color:#f92672>.</span>py:<span style=color:#ae81ff>575</span>: <span style=color:#a6e22e>TimeoutError</span>
+</code></pre></div><h2 id=question>Question</h2>
+<p>How to fix <code>tornado.util.TimeoutError: Operation timed out after 5 seconds</code> on <a href=https://github.com/tornadoweb/tornado><code>tornado</code></a> test debug?</p>
+<h2 id=answer>Answer</h2>
+<p>This is due <code>ASYNC_TEST_TIMEOUT</code> environment variable
+<a href=https://www.tornadoweb.org/en/stable/testing.html#tornado.testing.AsyncTestCase.wait>From docs</a></p>
+<blockquote>
+<p>In the event of a timeout, an exception will be thrown. The default timeout is 5 seconds; it may be overridden with a timeout keyword argument or globally with the <code>ASYNC_TEST_TIMEOUT</code> environment variable.</p>
+</blockquote>
+<p>And could be fixed by setting this variable to a bigger value in seconds</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console>$ <span style=color:#75715e># running tests with ASYNC_TEST_TIMEOUT set to 10 minutes</span>
+$ ASYNC_TEST_TIMEOUT<span style=color:#f92672>=</span><span style=color:#ae81ff>600</span> python -m unittest
+</code></pre></div><p>or if you are using <code>pytest</code> with <code>pytest-tornado</code> plugin by passing <code>--async-test-timeout</code> argument to <code>pytest</code> command</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console>$ pytest --async-test-timeout<span style=color:#f92672>=</span><span style=color:#ae81ff>600</span>
+</code></pre></div><h2 id=links>Links</h2>
+<ul>
+<li><a href=https://www.tornadoweb.org/en/stable/testing.html#tornado.testing.AsyncTestCase.wait>https://www.tornadoweb.org/en/stable/testing.html#tornado.testing.AsyncTestCase.wait</a></li>
+<li><a href=https://stackoverflow.com/a/49149757/3627387>https://stackoverflow.com/a/49149757/3627387</a></li>
+</ul>
+</article>
+</div></body>
+</html>

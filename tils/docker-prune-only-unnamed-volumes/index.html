@@ -1,0 +1,62 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<link rel=icon href=/favicon.ico>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Blog</title>
+<link rel=stylesheet href="/blog/css/main.min.076f25f16802c9ec06660a6a121a92d29518837ffb3f3129a7f2a1e7ed8ae34c.css">
+</head>
+<body><header>
+<nav class=nav>
+<ul>
+<a class=nav-item href=https://imomaliev.github.io/blog/>Blog</a>
+|
+<a class=nav-item href=/blog/tils/ title=TILs>TILs</a>
+</ul>
+</nav>
+</header>
+<div id=content>
+<article>
+<h1 class="text-5xl font-bold">Docker | Prune Only Unnamed Volumes</h1>
+<h2 id=story>Story</h2>
+<p>I was trying to do some cleanup of space for docker and needed to prune my unnamed volumes names.</p>
+<h2 id=question>Question</h2>
+<p>How to prune all unnamed docker volumes?</p>
+<h2 id=answer>Answer</h2>
+<p>Use <code>--filter</code> option. From docs:</p>
+<blockquote>
+<p>By default, all unused volumes are removed. You can limit the scope using
+the <code>--filter</code> flag. For instance, the following command only removes
+volumes which are not labelled with the <code>keep</code> label:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console>$ docker volume prune --filter <span style=color:#e6db74>&#34;label!=keep&#34;</span>
+</code></pre></div></blockquote>
+<p>But to create correct filter first we need to <code>inspect</code> volumes to find what labels and other parameters are present for them</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console>$ docker volume inspect project_volume
+[
+    {
+        &#34;CreatedAt&#34;: &#34;2021-09-30T11:35:55Z&#34;,
+        &#34;Driver&#34;: &#34;local&#34;,
+        &#34;Labels&#34;: {
+            &#34;com.docker.compose.project&#34;: &#34;project&#34;,
+            &#34;com.docker.compose.version&#34;: &#34;2.0.0&#34;,
+            &#34;com.docker.compose.volume&#34;: &#34;project_volume&#34;
+        },
+        &#34;Mountpoint&#34;: &#34;/var/lib/docker/volumes/project_project_data/_data&#34;,
+        &#34;Name&#34;: &#34;project_project_data&#34;,
+        &#34;Options&#34;: null,
+        &#34;Scope&#34;: &#34;local&#34;
+    }
+]
+</code></pre></div><p>So we could filter our volumes like this</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console>$ docker volume prune --filter <span style=color:#e6db74>&#39;label!=com.docker.compose.project&#39;</span>
+</code></pre></div><p><strong>Note</strong> <code>negative</code> filtering does not work for <code>docker volume ls</code> for some reason.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console>$ docker volume ls --filter <span style=color:#e6db74>&#39;label!=com.docker.compose.project&#39;</span>
+Error response from daemon: Invalid filter &#39;label!&#39;
+</code></pre></div><h2 id=links>Links</h2>
+<ul>
+<li><a href=https://docs.docker.com/engine/reference/commandline/volume_inspect/>https://docs.docker.com/engine/reference/commandline/volume_inspect/</a></li>
+<li><a href=https://docs.docker.com/config/pruning/#prune-volumes>https://docs.docker.com/config/pruning/#prune-volumes</a></li>
+</ul>
+</article>
+</div></body>
+</html>

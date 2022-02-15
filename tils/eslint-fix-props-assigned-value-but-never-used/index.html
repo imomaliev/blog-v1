@@ -1,0 +1,45 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<link rel=icon href=/favicon.ico>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Blog</title>
+<link rel=stylesheet href="/blog/css/main.min.076f25f16802c9ec06660a6a121a92d29518837ffb3f3129a7f2a1e7ed8ae34c.css">
+</head>
+<body><header>
+<nav class=nav>
+<ul>
+<a class=nav-item href=https://imomaliev.github.io/blog/>Blog</a>
+|
+<a class=nav-item href=/blog/tils/ title=TILs>TILs</a>
+</ul>
+</nav>
+</header>
+<div id=content>
+<article>
+<h1 class="text-5xl font-bold">ESLint | Fix "'props' is assigned a value but never used @typescript-eslint/no-unused-vars"</h1>
+<h2 id=story>Story</h2>
+<p>This is a continuation of <code>script setup</code> syntax usage. <code>eslint</code> thinks that variables like <code>props</code>, <code>emits</code> etc. are not used, but actually they are.</p>
+<h2 id=question>Question</h2>
+<p>How to fix ESLint error <code>'props' is assigned a value but never used @typescript-eslint/no-unused-vars</code>?</p>
+<h2 id=answer>Answer</h2>
+<p>Add <code>vue/script-setup-uses-vars</code> rule to eslint.</p>
+<blockquote>
+<p>ESLint no-unused-vars rule does not detect variables in <code>&lt;script setup></code> used in <code>&lt;template></code>. This rule will find variables in <code>&lt;script setup></code> used in <code>&lt;template></code> and mark them as used.</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff>module.exports = {
+  // Use the rule set.
+  extends: [&#39;plugin:vue/base&#39;],
+  rules: {
+    // Enable vue/script-setup-uses-vars rule
+<span style=color:#a6e22e>+     &#39;vue/script-setup-uses-vars&#39;: &#39;error&#39;,
+</span><span style=color:#a6e22e></span>  }
+}
+</code></pre></div><h2 id=links>Links</h2>
+<ul>
+<li><a href=https://eslint.vuejs.org/rules/script-setup-uses-vars.html>https://eslint.vuejs.org/rules/script-setup-uses-vars.html</a></li>
+<li><a href=https://eslint.vuejs.org/user-guide/#the-variables-used-in-the-template-are-warned-by-no-unused-vars-rule>https://eslint.vuejs.org/user-guide/#the-variables-used-in-the-template-are-warned-by-no-unused-vars-rule</a></li>
+</ul>
+</article>
+</div></body>
+</html>

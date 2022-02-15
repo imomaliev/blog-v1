@@ -1,0 +1,49 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<link rel=icon href=/favicon.ico>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Blog</title>
+<link rel=stylesheet href="/blog/css/main.min.076f25f16802c9ec06660a6a121a92d29518837ffb3f3129a7f2a1e7ed8ae34c.css">
+</head>
+<body><header>
+<nav class=nav>
+<ul>
+<a class=nav-item href=https://imomaliev.github.io/blog/>Blog</a>
+|
+<a class=nav-item href=/blog/tils/ title=TILs>TILs</a>
+</ul>
+</nav>
+</header>
+<div id=content>
+<article>
+<h1 class="text-5xl font-bold">NPM | Automatically Update package.json Dependencies</h1>
+<h2 id=story>Story</h2>
+<p>During chore update of my <a href=https://github.com/imomaliev/vue-ts>vue-ts template</a> dependencies (to learn more about it, read <a href=https://dev.to/imomaliev/series/13845>here</a>) I was doing usual npm &ldquo;upgrade&rdquo; steps.</p>
+<ol>
+<li>Run <code>npm update</code> to automatically update my packages to the latest versions
+From docs:
+<blockquote>
+<p>This command will update all the packages listed to the latest version (specified by the tag config), respecting the semver constraints of both your package and its dependencies (if they also require the same package).</p>
+</blockquote>
+</li>
+<li>Run <code>npm outdated</code> - to see what could be still updated.</li>
+</ol>
+<p><code>npm update</code> - only updates <code>package-lock.json</code> and does not change <code>package.json</code>. I started searching for a way to automatically update my dependencies in <code>package.json</code> file as well.</p>
+<h2 id=question>Question</h2>
+<p>How to automatically update <code>package.json</code> dependencies' versions?</p>
+<h2 id=answer>Answer</h2>
+<p>Quick searching pointed me to <a href=https://stackoverflow.com/questions/16073603/how-to-update-each-dependency-in-package-json-to-the-latest-version>this stackoverflow post</a>, where one of the answers suggested using <a href=https://www.npmjs.com/package/npm-check-updates>npm-check-updates</a> tool.</p>
+<ol>
+<li><code>npm -g install npm-check-updates</code></li>
+<li><code>ncu</code> to see outdated versions or <code>ncu --upgrade</code> to update the <code>package.json</code>.</li>
+</ol>
+<h2 id=links>Links</h2>
+<ul>
+<li><a href=https://github.com/imomaliev/vue-ts>https://github.com/imomaliev/vue-ts</a></li>
+<li><a href=https://stackoverflow.com/questions/16073603/how-to-update-each-dependency-in-package-json-to-the-latest-version>https://stackoverflow.com/questions/16073603/how-to-update-each-dependency-in-package-json-to-the-latest-version</a></li>
+<li><a href=https://www.npmjs.com/package/npm-check-updates>https://www.npmjs.com/package/npm-check-updates</a></li>
+</ul>
+</article>
+</div></body>
+</html>

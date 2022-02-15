@@ -1,0 +1,43 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<link rel=icon href=/favicon.ico>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Blog</title>
+<link rel=stylesheet href="/blog/css/main.min.076f25f16802c9ec06660a6a121a92d29518837ffb3f3129a7f2a1e7ed8ae34c.css">
+</head>
+<body><header>
+<nav class=nav>
+<ul>
+<a class=nav-item href=https://imomaliev.github.io/blog/>Blog</a>
+|
+<a class=nav-item href=/blog/tils/ title=TILs>TILs</a>
+</ul>
+</nav>
+</header>
+<div id=content>
+<article>
+<h1 class="text-5xl font-bold">GitHub Actions | Fix "Error: Dependencies lock file is not found"</h1>
+<h2 id=question>Question</h2>
+<p>How to fix this error:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console>Error: Dependencies lock file is not found in /path/to/project. Supported file patterns: package-lock.json,yarn.lock
+</code></pre></div><p>in <a href=https://github.com/actions/setup-node><code>actions/setup-node@v2</code></a> GitHub Action?</p>
+<h2 id=answer>Answer</h2>
+<p>This error occurs because by default, this job searches for <code>package-lock.json</code> in the root of the repository for caching. We need to explicitly specify the location of our <code>package-lock.json</code></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff>             - name: Setup Node.js
+               uses: actions/setup-node@v2
+               with:
+                   node-version: 16.14.0
+                   cache: &#34;npm&#34;
+<span style=color:#a6e22e>+                  # The action defaults to search for the dependency file
+</span><span style=color:#a6e22e>+                  # (package-lock.json or yarn.lock) in the repository root, and uses
+</span><span style=color:#a6e22e>+                  # its hash as a part of the cache key.
+</span><span style=color:#a6e22e>+                  # https://github.com/actions/setup-node#caching-packages-dependencies
+</span><span style=color:#a6e22e>+                  cache-dependency-path: &#34;./blog/package-lock.json&#34;
+</span></code></pre></div><h2 id=links>Links</h2>
+<ul>
+<li><a href=https://github.com/actions/setup-node#caching-packages-dependencies>https://github.com/actions/setup-node#caching-packages-dependencies</a></li>
+</ul>
+</article>
+</div></body>
+</html>

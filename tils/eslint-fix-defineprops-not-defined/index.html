@@ -1,0 +1,51 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<link rel=icon href=/favicon.ico>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Blog</title>
+<link rel=stylesheet href="/blog/css/main.min.076f25f16802c9ec06660a6a121a92d29518837ffb3f3129a7f2a1e7ed8ae34c.css">
+</head>
+<body><header>
+<nav class=nav>
+<ul>
+<a class=nav-item href=https://imomaliev.github.io/blog/>Blog</a>
+|
+<a class=nav-item href=/blog/tils/ title=TILs>TILs</a>
+</ul>
+</nav>
+</header>
+<div id=content>
+<article>
+<h1 class="text-5xl font-bold">ESLint | Fix "'defineProps' is not defined."</h1>
+<h2 id=story>Story</h2>
+<p>In one of my <code>vue-ts</code> series' <a href=https://dev.to/imomaliev/creating-vite-vue-ts-template-project-configs-improvements-3617>article</a>, I was asked how to resolve <a href=https://dev.to/algil/comment/1igom>this</a> issue</p>
+<blockquote>
+<p>How have you resolve this console warning (on npm run dev)?</p>
+<p>[@vue/compiler-sfc]definePropsis a compiler macro and no longer needs to be imported.</p>
+<p>But if I don&rsquo;t import defineProps in HelloWorld.vue file, the next line is underline in red:</p>
+<p>defineProps&lt;{ msg: string }>()</p>
+<p>With this message:</p>
+<p>&lsquo;defineProps&rsquo; is not defined.eslint(no-undef)</p>
+<p>Thanks!</p>
+</blockquote>
+<h2 id=question>Question</h2>
+<p>How to fix ESLint error <code>defineProps' is not defined. eslint(no-undef)</code>?</p>
+<h2 id=answer>Answer</h2>
+<p>Add <code>'vue/setup-compiler-macros': true</code> to <code>env</code> in <code>eslint</code>. From <a href=https://eslint.vuejs.org/user-guide/#compiler-macros-such-as-defineprops-and-defineemits-generate-no-undef-warnings>docs</a>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff>module.exports = {
+<span style=color:#a6e22e>+   env: {
+</span><span style=color:#a6e22e>+     &#39;vue/setup-compiler-macros&#39;: true
+</span><span style=color:#a6e22e>+   }
+</span><span style=color:#a6e22e></span>}
+</code></pre></div><p>Basically in newer vue versions with <code>script setup</code> syntax <code>defineProps</code> is no longer needs to be imported because it is a <code>compliler macro</code> as it states in quote above. So the solution was just to configure <code>eslint</code> to not warn about <code>defineProps</code></p>
+<h2 id=links>Links</h2>
+<ul>
+<li><a href=https://dev.to/algil/comment/1igom>https://dev.to/algil/comment/1igom</a></li>
+<li><a href=https://dev.to/imomaliev/creating-vite-vue-ts-template-project-configs-improvements-3617>https://dev.to/imomaliev/creating-vite-vue-ts-template-project-configs-improvements-3617</a></li>
+<li><a href=https://eslint.vuejs.org/user-guide/#compiler-macros-such-as-defineprops-and-defineemits-are-warned-by-no-undef-rule>https://eslint.vuejs.org/user-guide/#compiler-macros-such-as-defineprops-and-defineemits-are-warned-by-no-undef-rule</a></li>
+<li><a href=https://dev.to/imomaliev/comment/1ihh5>https://dev.to/imomaliev/comment/1ihh5</a></li>
+</ul>
+</article>
+</div></body>
+</html>
