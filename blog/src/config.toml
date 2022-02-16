@@ -8,7 +8,9 @@ writeStats = true
 
 [menu]
 [[menu.main]]
-identifier = "tils"
+pageRef = "/"
+name = "Blog"
+
+[[menu.main]]
+pageRef = "/tils/"
 name = "TILs"
-title = "TILs"
-url = "/tils/"

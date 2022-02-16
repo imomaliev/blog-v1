@@ -1,14 +1,23 @@
 <header>
-    <nav class="nav">
+    <nav>
         <ul>
-            <a class="nav-item" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
-            |
             {{ $currentPage := . }}
-            {{ range .Site.Menus.main }}
+            {{ range first 1 .Site.Menus.main }}
                 <a
-                    class="nav-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}
-                        active
-                    {{ end }}"
+                    class="{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}
+                        underline
+                    {{ end }} text-lg text-blue-600"
+                    href="{{ .URL }}"
+                    title="{{ .Title }}"
+                    >{{ .Name }}</a
+                >
+            {{ end }}
+            {{ range after 1 .Site.Menus.main }}
+                |
+                <a
+                    class="{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}
+                        underline
+                    {{ end }} text-lg text-blue-600"
                     href="{{ .URL }}"
                     title="{{ .Title }}"
                     >{{ .Name }}</a
