@@ -1,6 +1,8 @@
 {{ define "main" }}
-    <article>
-        <h1 class="text-5xl font-bold">{{ .Title }}</h1>
+    <article
+        class="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl mx-auto"
+    >
+        <h1>{{ .Title }}</h1>
         <!-- do not render h1 from til -->
         {{ replaceRE "(.*)<h1.*</h1>(.*)" "$1$2" .Content | safeHTML }}
     </article>

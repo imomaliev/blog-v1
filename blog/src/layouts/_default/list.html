@@ -1,7 +1,7 @@
 {{ define "main" }}
     <h1 class="text-5xl font-bold">{{ .Title }}: {{ len .Pages }}</h1>
     {{ range .Pages }}
-        <article>
+        <div>
             <h2 class="text-4xl underline">
                 <a href="{{ .RelPermalink }}">{{ .Title }}</a>
             </h2>
@@ -16,6 +16,6 @@
                     </li>
                 {{ end }}
             </ul>
-        </article>
+        </div>
     {{ end }}
 {{ end }}
