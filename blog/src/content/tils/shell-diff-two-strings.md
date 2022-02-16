@@ -1,11 +1,11 @@
 ---
-title: "Diff Two Strings"
+title: "Shell | Diff Two Strings"
 date: 2021-02-27T20:53:56+07:00
 draft: false
 tags: ["shell"]
 ---
 
-# How to diff 2 or more strings
+# Shell | How to diff 2 or more strings
 
 ## Question
 

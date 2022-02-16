@@ -1,11 +1,11 @@
 ---
-title: "Setup Workrtree"
+title: "Git | Setup Workrtree"
 date: 2021-07-28T14:39:31+07:00
 draft: false
 tags: ["git"]
 ---
 
-# Setup worktree
+# Git | Setup worktree
 
 ## Question
 

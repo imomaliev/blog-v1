@@ -1,11 +1,11 @@
 ---
-title: "Create Page In Migration"
+title: "Wagtail | Create Page In Migration"
 date: 2021-02-27T22:15:11+07:00
 draft: false
-tags: ["wagtail"]
+tags: ["wagtail", "django"]
 ---
 
-# How to create page in migration
+# Wagtail | How to create page in migration
 
 ## Question
 

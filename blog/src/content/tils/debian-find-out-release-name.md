@@ -1,11 +1,11 @@
 ---
-title: "Find Out Release Name"
+title: "Debian | Find Out Release Name"
 date: 2021-03-30T17:45:58+07:00
 draft: false
 tags: ["debian"]
 ---
 
-# How to find out release name
+# Debian | How to find out release name
 
 ## Question
 

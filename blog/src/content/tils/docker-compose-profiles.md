@@ -1,11 +1,11 @@
 ---
-title: "Docker Compose Profiles"
+title: "Docker Compose | Profiles"
 date: 2021-04-05T13:13:52+07:00
 draft: false
-tags: ["docker"]
+tags: ["docker", "docker-compose"]
 ---
 
-# Docker compose profiles directive
+# Docker Compose | Profiles directive
 
 ## Question
 

@@ -1,11 +1,11 @@
 ---
-title: "Better Way Of Setting Mapping That Calls Cmd"
+title: "Vim | Better Way Of Setting Mapping That Calls Cmd"
 date: 2021-03-23T23:45:32+07:00
 draft: false
 tags: ["vim"]
 ---
 
-# A better way of setting mapping that calls command mode
+# Vim | Better way of setting mapping that calls command mode
 
 ## Question
 
@@ -18,7 +18,7 @@ I was trying to create mapping that will not be run for `help` filetype but duri
 > The <Cmd> pseudokey begins a "command mapping", which executes the command directly (without changing modes). Where you might use ":...<CR>" in the {lhs} of a mapping, you can instead use "<Cmd>...<CR>".
 
 ```vim
-nnoremap <buffer> <C-]> <cmd>call JumpToTagWithLocationList()<CR>
+nnoremap <buffer> <C-]> <Cmd>call JumpToTagWithLocationList()<CR>
 ```
 
 There is `<Cmd>` argument for `:map`. For more info `:h :map-<cmd>`

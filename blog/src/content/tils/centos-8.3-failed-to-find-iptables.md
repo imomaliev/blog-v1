@@ -1,11 +1,11 @@
 ---
-title: "Centos 8.3 Failed To Find Iptables"
+title: "Centos | 8.3 Failed To Find Iptables"
 date: 2021-02-27T20:53:56+07:00
 draft: false
-tags: ["docker"]
+tags: ["docker", "centos"]
 ---
 
-# CentOS 8.3 failed to find iptables
+# CentOS | 8.3 failed to find iptables
 
 ## Question
 

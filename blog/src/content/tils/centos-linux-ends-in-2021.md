@@ -1,11 +1,11 @@
 ---
-title: "Centos Linux Ends In 2021"
+title: "Centos | Linux Ends In 2021"
 date: 2021-02-27T20:53:56+07:00
 draft: false
-tags: ["rhel"]
+tags: ["rhel", "centos"]
 ---
 
-# CentOS Linux project ends in 2021
+# CentOS | Linux project ends in 2021
 
 ## Question
 

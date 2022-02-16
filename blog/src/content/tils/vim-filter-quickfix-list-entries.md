@@ -1,11 +1,11 @@
 ---
-title: "Filter Quickfix List Entries"
+title: "Vim | Filter Quickfix List Entries"
 date: 2021-03-25T23:44:07+07:00
 draft: false
 tags: ["vim"]
 ---
 
-# How to filter quickfix list entries
+# Vim | How to filter quickfix list entries
 
 ## Question
 

@@ -1,11 +1,11 @@
 ---
-title: "TailwindCSS Custom Transform Before Exctraction"
+title: "TailwindCSS | Custom Transform Before Exctraction"
 date: 2022-02-13T21:58:46+07:00
 draft: false
 tags: ["tailwindcss", "hugo", "postcss"]
 ---
 
-# TailwindCSS Custom Transform Before Exctraction
+# TailwindCSS | Custom Transform Before Exctraction
 
 ## Story
 

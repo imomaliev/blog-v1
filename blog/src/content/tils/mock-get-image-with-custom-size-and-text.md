@@ -1,11 +1,11 @@
 ---
-title: "Get Mock Image With Custom Size And Text"
+title: "Mock | Get Image With Custom Size And Text"
 date: 2021-04-26T17:30:01+07:00
 draft: false
-tags: ["frontend"]
+tags: ["mock", "frontend"]
 ---
 
-# How to get mock image with custom size and text
+# Mock | How to get image with custom size and text
 
 ## Question
 

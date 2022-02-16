@@ -1,11 +1,11 @@
 ---
-title: "Edit Launchctl System Domain Config"
+title: "Launchctl | Edit System Domain Config"
 date: 2021-03-30T17:45:58+07:00
 draft: false
-tags: ["macos"]
+tags: ["macos", "launchctl"]
 ---
 
-# How to edit launchctl system domain configs
+# Launchctl | How to edit system domain configs
 
 ## Question
 

@@ -1,11 +1,11 @@
 ---
-title: "Buildkit Use Cache From"
+title: "Docker | Buildkit Use Cache From"
 date: 2021-05-29T12:12:34+07:00
 draft: false
-tags: ["docker"]
+tags: ["docker", "ci"]
 ---
 
-# In CI buildkit images are not reusing cache from provided images
+# Docker | In CI buildkit images are not reusing cache from provided images
 
 ## Question
 
