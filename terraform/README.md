@@ -1,4 +1,4 @@
-# Configuring github project
+# Configuring project
 
 ## Set variables
 
@@ -10,6 +10,7 @@ $ cp terraform.tfvars.template terraform.tfvars
 
 ```console
 $ terraform init
+$ terraform get
 $ terraform plan
 $ terraform apply
 ```

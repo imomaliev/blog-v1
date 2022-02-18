@@ -1,8 +1,3 @@
-variable "github_token" {
-  description = "Github token"
-  type        = string
-}
-
 variable "project_name" {
   description = "Project name"
   type        = string
@@ -21,14 +16,13 @@ variable "project_url" {
   default     = "https://imomaliev.github.io/blog"
 }
 
-variable "project_license" {
-  description = "Project license"
+variable "github_token" {
+  description = "GitHub token"
   type        = string
-  default     = "MIT"
 }
 
-variable "project_topics" {
-  description = "Project topics"
+variable "github_topics" {
+  description = "GitHub project topics"
   type        = list(string)
   default     = []
 }

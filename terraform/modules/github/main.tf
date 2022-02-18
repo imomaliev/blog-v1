@@ -1,5 +1,5 @@
 provider "github" {
-  token = var.github_token
+  token = var.token
 }
 
 # https://registry.terraform.io/providers/integrations/github/4.19.2/docs/resources/repository
@@ -13,9 +13,9 @@ resource "github_repository" "project" {
   has_wiki               = false
   is_template            = false
   delete_branch_on_merge = true
-  license_template       = var.project_license
+  license_template       = var.license
   auto_init              = true
-  topics                 = var.project_topics
+  topics                 = var.topics
   vulnerability_alerts   = true
   # TODO: add a way to setup https://docs.github.com/en/rest/reference/repos#enable-automated-security-fixes
 
