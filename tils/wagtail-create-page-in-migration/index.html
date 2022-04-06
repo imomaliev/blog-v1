@@ -1,61 +1,22 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<link rel=icon href=/favicon.ico>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<title>Blog</title>
-<link rel=stylesheet href="/blog/css/main.min.0a1265f87d82ecc5f08f9855f888f820ab77c67e51ba121bafdccbb5c3ddae79.css">
-</head>
-<body><header>
-<nav>
-<ul>
-<a class="text-lg font-bold text-cyan-600" href=/blog/ title=Blog>Blog</a>
+<!doctype html><html lang=en><head><meta charset=utf-8><link rel=icon href=/favicon.ico><meta name=viewport content="width=device-width,initial-scale=1"><title>Blog</title><link rel=stylesheet href="/blog/css/main.min.0a1265f87d82ecc5f08f9855f888f820ab77c67e51ba121bafdccbb5c3ddae79.css"></head><body><header><nav><ul><a class="text-lg font-bold text-cyan-600" href=/blog/ title=Blog>Blog</a>
 |
 <a class="underline
-text-lg font-bold text-cyan-600" href=/blog/tils/ title=TILs>TILs</a>
-</ul>
-</nav>
-</header>
-<div id=content>
-<article class="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl
-prose-cyan mx-auto">
-<h1>Wagtail | Create Page In Migration</h1>
-<h2 id=question>Question</h2>
-<p>After data migration with <code>Page</code> model subclass object creation it doesn&rsquo;t appear in admin</p>
-<h2 id=answer>Answer</h2>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 1 - get your home page</span>
-home_page <span style=color:#f92672>=</span> HomePage<span style=color:#f92672>.</span>objects<span style=color:#f92672>.</span>first()  <span style=color:#75715e># this will get the first HomePage</span>
-
-<span style=color:#75715e># 2 - create a page instance, this is not yet stored in the DB</span>
-page <span style=color:#f92672>=</span> Page(
-    title<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;title&#39;</span>,
-    slug<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;slug&#39;</span>
-)
-
-<span style=color:#75715e># 3 - create the new page as a child of the parent (home), this puts a new page in the DB</span>
-home_page<span style=color:#f92672>.</span>add_child(instance<span style=color:#f92672>=</span>page)
-
-<span style=color:#75715e># 4a - create a revision of the page, assuming you want it published now</span>
-page<span style=color:#f92672>.</span>save_revision()
-
-<span style=color:#75715e># 4b - create a revision of the page, without publishing</span>
-page<span style=color:#f92672>.</span>publish()
-</code></pre></div><h2 id=links>Links</h2>
-<ul>
-<li><a href=https://cfpb.github.io/consumerfinance.gov/migrations/#do-i-need-to-create-a-migration>https://cfpb.github.io/consumerfinance.gov/migrations/#do-i-need-to-create-a-migration</a></li>
-<li><a href=https://github.com/cfpb/consumerfinance.gov/blob/ef3597113c1fa6317389841eee5318326518db22/cfgov/v1/util/migrations.py>https://github.com/cfpb/consumerfinance.gov/blob/ef3597113c1fa6317389841eee5318326518db22/cfgov/v1/util/migrations.py</a></li>
-<li><a href=https://stackoverflow.com/questions/47788080/how-can-i-create-page-and-set-its-streamfield-value-programmatically>https://stackoverflow.com/questions/47788080/how-can-i-create-page-and-set-its-streamfield-value-programmatically</a></li>
-<li><a href=https://stackoverflow.com/questions/47749708/is-there-any-way-to-create-and-publish-pages-by-executing-python-script-in-wagta>https://stackoverflow.com/questions/47749708/is-there-any-way-to-create-and-publish-pages-by-executing-python-script-in-wagta</a></li>
-<li><a href=https://stackoverflow.com/questions/43040023/programatically-add-a-page-to-a-known-parent>https://stackoverflow.com/questions/43040023/programatically-add-a-page-to-a-known-parent</a></li>
-<li><a href=https://gist.github.com/veuncent/9dab311125401c1886eb7c6998f5f387>https://gist.github.com/veuncent/9dab311125401c1886eb7c6998f5f387</a></li>
-<li><a href=https://github.com/wagtail/wagtail/issues/4613>https://github.com/wagtail/wagtail/issues/4613</a></li>
-<li><a href=https://github.com/wagtail/wagtail/issues/1101>https://github.com/wagtail/wagtail/issues/1101</a></li>
-<li><a href=https://github.com/wagtail/wagtail/issues/5535>https://github.com/wagtail/wagtail/issues/5535</a></li>
-<li><a href=https://github.com/wagtail/wagtail/issues/742>https://github.com/wagtail/wagtail/issues/742</a></li>
-<li><a href=https://github.com/point97/marco-portal2/blob/5db51715ed6c929835c44ee335187620194ea3dd/marco_portal/portal/initial_data/migrations/0001_create_ocean_stories_container.py>https://github.com/point97/marco-portal2/blob/5db51715ed6c929835c44ee335187620194ea3dd/marco_portal/portal/initial_data/migrations/0001_create_ocean_stories_container.py</a></li>
-<li><a href=https://github.com/wagtail/wagtail/issues/5535>https://github.com/wagtail/wagtail/issues/5535</a></li>
-<li><a href=https://github.com/wagtail/wagtail/pull/4621>https://github.com/wagtail/wagtail/pull/4621</a></li>
-</ul>
-</article>
-</div></body>
-</html>
+text-lg font-bold text-cyan-600" href=/blog/tils/ title=TILs>TILs</a></ul></nav></header><div id=content><article class="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl
+prose-cyan mx-auto"><h1>Wagtail | Create Page In Migration</h1><h2 id=question>Question</h2><p>After data migration with <code>Page</code> model subclass object creation it doesn&rsquo;t appear in admin</p><h2 id=answer>Answer</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 1 - get your home page</span>
+</span></span><span style=display:flex><span>home_page <span style=color:#f92672>=</span> HomePage<span style=color:#f92672>.</span>objects<span style=color:#f92672>.</span>first()  <span style=color:#75715e># this will get the first HomePage</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2 - create a page instance, this is not yet stored in the DB</span>
+</span></span><span style=display:flex><span>page <span style=color:#f92672>=</span> Page(
+</span></span><span style=display:flex><span>    title<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;title&#39;</span>,
+</span></span><span style=display:flex><span>    slug<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;slug&#39;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 3 - create the new page as a child of the parent (home), this puts a new page in the DB</span>
+</span></span><span style=display:flex><span>home_page<span style=color:#f92672>.</span>add_child(instance<span style=color:#f92672>=</span>page)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 4a - create a revision of the page, assuming you want it published now</span>
+</span></span><span style=display:flex><span>page<span style=color:#f92672>.</span>save_revision()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 4b - create a revision of the page, without publishing</span>
+</span></span><span style=display:flex><span>page<span style=color:#f92672>.</span>publish()
+</span></span></code></pre></div><h2 id=links>Links</h2><ul><li><a href=https://cfpb.github.io/consumerfinance.gov/migrations/#do-i-need-to-create-a-migration>https://cfpb.github.io/consumerfinance.gov/migrations/#do-i-need-to-create-a-migration</a></li><li><a href=https://github.com/cfpb/consumerfinance.gov/blob/ef3597113c1fa6317389841eee5318326518db22/cfgov/v1/util/migrations.py>https://github.com/cfpb/consumerfinance.gov/blob/ef3597113c1fa6317389841eee5318326518db22/cfgov/v1/util/migrations.py</a></li><li><a href=https://stackoverflow.com/questions/47788080/how-can-i-create-page-and-set-its-streamfield-value-programmatically>https://stackoverflow.com/questions/47788080/how-can-i-create-page-and-set-its-streamfield-value-programmatically</a></li><li><a href=https://stackoverflow.com/questions/47749708/is-there-any-way-to-create-and-publish-pages-by-executing-python-script-in-wagta>https://stackoverflow.com/questions/47749708/is-there-any-way-to-create-and-publish-pages-by-executing-python-script-in-wagta</a></li><li><a href=https://stackoverflow.com/questions/43040023/programatically-add-a-page-to-a-known-parent>https://stackoverflow.com/questions/43040023/programatically-add-a-page-to-a-known-parent</a></li><li><a href=https://gist.github.com/veuncent/9dab311125401c1886eb7c6998f5f387>https://gist.github.com/veuncent/9dab311125401c1886eb7c6998f5f387</a></li><li><a href=https://github.com/wagtail/wagtail/issues/4613>https://github.com/wagtail/wagtail/issues/4613</a></li><li><a href=https://github.com/wagtail/wagtail/issues/1101>https://github.com/wagtail/wagtail/issues/1101</a></li><li><a href=https://github.com/wagtail/wagtail/issues/5535>https://github.com/wagtail/wagtail/issues/5535</a></li><li><a href=https://github.com/wagtail/wagtail/issues/742>https://github.com/wagtail/wagtail/issues/742</a></li><li><a href=https://github.com/point97/marco-portal2/blob/5db51715ed6c929835c44ee335187620194ea3dd/marco_portal/portal/initial_data/migrations/0001_create_ocean_stories_container.py>https://github.com/point97/marco-portal2/blob/5db51715ed6c929835c44ee335187620194ea3dd/marco_portal/portal/initial_data/migrations/0001_create_ocean_stories_container.py</a></li><li><a href=https://github.com/wagtail/wagtail/issues/5535>https://github.com/wagtail/wagtail/issues/5535</a></li><li><a href=https://github.com/wagtail/wagtail/pull/4621>https://github.com/wagtail/wagtail/pull/4621</a></li></ul></article></div></body></html>

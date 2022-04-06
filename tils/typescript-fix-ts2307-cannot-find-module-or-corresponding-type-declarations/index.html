@@ -1,57 +1,18 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<link rel=icon href=/favicon.ico>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<title>Blog</title>
-<link rel=stylesheet href="/blog/css/main.min.0a1265f87d82ecc5f08f9855f888f820ab77c67e51ba121bafdccbb5c3ddae79.css">
-</head>
-<body><header>
-<nav>
-<ul>
-<a class="text-lg font-bold text-cyan-600" href=/blog/ title=Blog>Blog</a>
+<!doctype html><html lang=en><head><meta charset=utf-8><link rel=icon href=/favicon.ico><meta name=viewport content="width=device-width,initial-scale=1"><title>Blog</title><link rel=stylesheet href="/blog/css/main.min.0a1265f87d82ecc5f08f9855f888f820ab77c67e51ba121bafdccbb5c3ddae79.css"></head><body><header><nav><ul><a class="text-lg font-bold text-cyan-600" href=/blog/ title=Blog>Blog</a>
 |
 <a class="underline
-text-lg font-bold text-cyan-600" href=/blog/tils/ title=TILs>TILs</a>
-</ul>
-</nav>
-</header>
-<div id=content>
-<article class="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl
-prose-cyan mx-auto">
-<h1>TypeScript | Fix "TS2307: Cannot find module 'src' or its corresponding type declarations."</h1>
-<h2 id=story>Story</h2>
-<p>After I updated my <code>package.json</code> and installed all dependencies, my <code>npm run build</code> started failing with</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console>$ npm run build
-<span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010></span>&gt; vite-vue-typescript-starter@0.0.0 build
-&gt; vue-tsc --noEmit <span style=color:#f92672>&amp;&amp;</span> vite build
-<span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010></span>node_modules/@vue/test-utils/dist/domWrapper.d.ts:5:28 - error TS2307: Cannot find module &#39;src&#39; or its corresponding type declarations.
-<span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010></span>5 import { VueWrapper } from &#39;src&#39;;
-                             ~~~~~
-<span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010></span>Found 1 error.
-</code></pre></div><h2 id=question>Question</h2>
-<p>How to fix?</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console>error TS2307: Cannot find module &#39;src&#39; or its corresponding type declarations.
-</code></pre></div><h2 id=answer>Answer</h2>
-<p>This was a tricky one because at a first glance it may seem that I have a typescript problem in project which is technically correct, but actually this is a <a href=https://github.com/vuejs/vue-test-utils-next/issues/936>bug</a> in <code>@vue/test-utils-next</code> library which was introduced in <code>2.0.0-rc.14</code> version. Installing <code>2.0.0-rc.13</code> or setting <code>skipLibCheck: true</code> in <code>tsconfig.json</code> solves this. For my case, I&rsquo;ve chosen the first approach.</p>
-<h2 id=what-i-learned>What I Learned</h2>
-<ol>
-<li><a href=https://www.typescriptlang.org/tsconfig#skipLibCheck><code>skipLibCheck: true</code></a>
-<blockquote>
-<p>Skip type checking of declaration files.</p>
-</blockquote>
-</li>
-</ol>
-<h3 id=links>Links</h3>
-<ul>
-<li><a href=https://github.com/vuejs/vue-test-utils-next/issues/936>https://github.com/vuejs/vue-test-utils-next/issues/936</a></li>
-<li><a href=https://www.typescriptlang.org/tsconfig#skipLibCheck>https://www.typescriptlang.org/tsconfig#skipLibCheck</a></li>
-</ul>
-</article>
-</div></body>
-</html>
+text-lg font-bold text-cyan-600" href=/blog/tils/ title=TILs>TILs</a></ul></nav></header><div id=content><article class="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl
+prose-cyan mx-auto"><h1>TypeScript | Fix "TS2307: Cannot find module 'src' or its corresponding type declarations."</h1><h2 id=story>Story</h2><p>After I updated my <code>package.json</code> and installed all dependencies, my <code>npm run build</code> started failing with</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console><span style=display:flex><span>$ npm run build
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>&gt; vite-vue-typescript-starter@0.0.0 build
+</span></span><span style=display:flex><span>&gt; vue-tsc --noEmit <span style=color:#f92672>&amp;&amp;</span> vite build
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>node_modules/@vue/test-utils/dist/domWrapper.d.ts:5:28 - error TS2307: Cannot find module &#39;src&#39; or its corresponding type declarations.
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>5 import { VueWrapper } from &#39;src&#39;;
+</span></span><span style=display:flex><span>                             ~~~~~
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>Found 1 error.
+</span></span></code></pre></div><h2 id=question>Question</h2><p>How to fix?</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console><span style=display:flex><span>error TS2307: Cannot find module &#39;src&#39; or its corresponding type declarations.
+</span></span></code></pre></div><h2 id=answer>Answer</h2><p>This was a tricky one because at a first glance it may seem that I have a typescript problem in project which is technically correct, but actually this is a <a href=https://github.com/vuejs/vue-test-utils-next/issues/936>bug</a> in <code>@vue/test-utils-next</code> library which was introduced in <code>2.0.0-rc.14</code> version. Installing <code>2.0.0-rc.13</code> or setting <code>skipLibCheck: true</code> in <code>tsconfig.json</code> solves this. For my case, I&rsquo;ve chosen the first approach.</p><h2 id=what-i-learned>What I Learned</h2><ol><li><a href=https://www.typescriptlang.org/tsconfig#skipLibCheck><code>skipLibCheck: true</code></a><blockquote><p>Skip type checking of declaration files.</p></blockquote></li></ol><h3 id=links>Links</h3><ul><li><a href=https://github.com/vuejs/vue-test-utils-next/issues/936>https://github.com/vuejs/vue-test-utils-next/issues/936</a></li><li><a href=https://www.typescriptlang.org/tsconfig#skipLibCheck>https://www.typescriptlang.org/tsconfig#skipLibCheck</a></li></ul></article></div></body></html>

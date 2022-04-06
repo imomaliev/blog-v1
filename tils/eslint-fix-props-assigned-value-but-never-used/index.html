@@ -1,47 +1,13 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<link rel=icon href=/favicon.ico>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<title>Blog</title>
-<link rel=stylesheet href="/blog/css/main.min.0a1265f87d82ecc5f08f9855f888f820ab77c67e51ba121bafdccbb5c3ddae79.css">
-</head>
-<body><header>
-<nav>
-<ul>
-<a class="text-lg font-bold text-cyan-600" href=/blog/ title=Blog>Blog</a>
+<!doctype html><html lang=en><head><meta charset=utf-8><link rel=icon href=/favicon.ico><meta name=viewport content="width=device-width,initial-scale=1"><title>Blog</title><link rel=stylesheet href="/blog/css/main.min.0a1265f87d82ecc5f08f9855f888f820ab77c67e51ba121bafdccbb5c3ddae79.css"></head><body><header><nav><ul><a class="text-lg font-bold text-cyan-600" href=/blog/ title=Blog>Blog</a>
 |
 <a class="underline
-text-lg font-bold text-cyan-600" href=/blog/tils/ title=TILs>TILs</a>
-</ul>
-</nav>
-</header>
-<div id=content>
-<article class="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl
-prose-cyan mx-auto">
-<h1>ESLint | Fix "'props' is assigned a value but never used @typescript-eslint/no-unused-vars"</h1>
-<h2 id=story>Story</h2>
-<p>This is a continuation of <code>script setup</code> syntax usage. <code>eslint</code> thinks that variables like <code>props</code>, <code>emits</code> etc. are not used, but actually they are.</p>
-<h2 id=question>Question</h2>
-<p>How to fix ESLint error <code>'props' is assigned a value but never used @typescript-eslint/no-unused-vars</code>?</p>
-<h2 id=answer>Answer</h2>
-<p>Add <code>vue/script-setup-uses-vars</code> rule to eslint.</p>
-<blockquote>
-<p>ESLint no-unused-vars rule does not detect variables in <code>&lt;script setup></code> used in <code>&lt;template></code>. This rule will find variables in <code>&lt;script setup></code> used in <code>&lt;template></code> and mark them as used.</p>
-</blockquote>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff>module.exports = {
-  // Use the rule set.
-  extends: [&#39;plugin:vue/base&#39;],
-  rules: {
-    // Enable vue/script-setup-uses-vars rule
-<span style=color:#a6e22e>+     &#39;vue/script-setup-uses-vars&#39;: &#39;error&#39;,
-</span><span style=color:#a6e22e></span>  }
-}
-</code></pre></div><h2 id=links>Links</h2>
-<ul>
-<li><a href=https://eslint.vuejs.org/rules/script-setup-uses-vars.html>https://eslint.vuejs.org/rules/script-setup-uses-vars.html</a></li>
-<li><a href=https://eslint.vuejs.org/user-guide/#the-variables-used-in-the-template-are-warned-by-no-unused-vars-rule>https://eslint.vuejs.org/user-guide/#the-variables-used-in-the-template-are-warned-by-no-unused-vars-rule</a></li>
-</ul>
-</article>
-</div></body>
-</html>
+text-lg font-bold text-cyan-600" href=/blog/tils/ title=TILs>TILs</a></ul></nav></header><div id=content><article class="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl
+prose-cyan mx-auto"><h1>ESLint | Fix "'props' is assigned a value but never used @typescript-eslint/no-unused-vars"</h1><h2 id=story>Story</h2><p>This is a continuation of <code>script setup</code> syntax usage. <code>eslint</code> thinks that variables like <code>props</code>, <code>emits</code> etc. are not used, but actually they are.</p><h2 id=question>Question</h2><p>How to fix ESLint error <code>'props' is assigned a value but never used @typescript-eslint/no-unused-vars</code>?</p><h2 id=answer>Answer</h2><p>Add <code>vue/script-setup-uses-vars</code> rule to eslint.</p><blockquote><p>ESLint no-unused-vars rule does not detect variables in <code>&lt;script setup></code> used in <code>&lt;template></code>. This rule will find variables in <code>&lt;script setup></code> used in <code>&lt;template></code> and mark them as used.</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff><span style=display:flex><span>module.exports = {
+</span></span><span style=display:flex><span>  // Use the rule set.
+</span></span><span style=display:flex><span>  extends: [&#39;plugin:vue/base&#39;],
+</span></span><span style=display:flex><span>  rules: {
+</span></span><span style=display:flex><span>    // Enable vue/script-setup-uses-vars rule
+</span></span><span style=display:flex><span><span style=color:#a6e22e>+     &#39;vue/script-setup-uses-vars&#39;: &#39;error&#39;,
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e></span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=links>Links</h2><ul><li><a href=https://eslint.vuejs.org/rules/script-setup-uses-vars.html>https://eslint.vuejs.org/rules/script-setup-uses-vars.html</a></li><li><a href=https://eslint.vuejs.org/user-guide/#the-variables-used-in-the-template-are-warned-by-no-unused-vars-rule>https://eslint.vuejs.org/user-guide/#the-variables-used-in-the-template-are-warned-by-no-unused-vars-rule</a></li></ul></article></div></body></html>

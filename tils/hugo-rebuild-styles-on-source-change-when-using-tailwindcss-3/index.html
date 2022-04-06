@@ -1,86 +1,45 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<link rel=icon href=/favicon.ico>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<title>Blog</title>
-<link rel=stylesheet href="/blog/css/main.min.0a1265f87d82ecc5f08f9855f888f820ab77c67e51ba121bafdccbb5c3ddae79.css">
-</head>
-<body><header>
-<nav>
-<ul>
-<a class="text-lg font-bold text-cyan-600" href=/blog/ title=Blog>Blog</a>
+<!doctype html><html lang=en><head><meta charset=utf-8><link rel=icon href=/favicon.ico><meta name=viewport content="width=device-width,initial-scale=1"><title>Blog</title><link rel=stylesheet href="/blog/css/main.min.0a1265f87d82ecc5f08f9855f888f820ab77c67e51ba121bafdccbb5c3ddae79.css"></head><body><header><nav><ul><a class="text-lg font-bold text-cyan-600" href=/blog/ title=Blog>Blog</a>
 |
 <a class="underline
-text-lg font-bold text-cyan-600" href=/blog/tils/ title=TILs>TILs</a>
-</ul>
-</nav>
-</header>
-<div id=content>
-<article class="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl
-prose-cyan mx-auto">
-<h1>Hugo | Rebuild Styles on Source Change when using TailwindCSS 3.x</h1>
-<h2 id=story>Story</h2>
-<p>After applying styles rebuild hack provided by <a href=https://github.com/Gioni06>@Gioni06</a>, <a href=https://github.com/nnooney>@nnooney</a> and <a href=https://github.com/istr>@istr</a> in <a href=https://github.com/gohugoio/hugo/issues/8343>this issue</a> and looks like this</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff>diff --git a/path/to/head.html b/path/to/head.html
-<span style=color:#f92672>--- a/path/to/head.html
-</span><span style=color:#f92672></span><span style=color:#a6e22e>+++ b/path/to/head.html
-</span><span style=color:#a6e22e></span> {{ $styles := resources.Get &#34;css/tw.css&#34; }}
- {{ $styles = $styles | resources.PostCSS }}
- {{ if hugo.IsProduction }}
-     {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
-<span style=color:#a6e22e>+{{ else if .Site.IsServer }}
-</span><span style=color:#a6e22e>+    {{ $styles = $styles | resources.ExecuteAsTemplate (printf &#34;main.%v.css&#34; now.UnixMilli) . }}
-</span><span style=color:#a6e22e></span> {{ end }}
- &lt;link href=&#34;{{ $styles.RelPermalink }}&#34; rel=&#34;stylesheet&#34; /&gt;
-diff --git a/path/to/baseof.html b/path/to/baseof.html
-<span style=color:#f92672>--- a/path/to/baseof.html
-</span><span style=color:#f92672></span><span style=color:#a6e22e>+++ b/path/to/baseof.html
-</span><span style=color:#a6e22e></span> &lt;!DOCTYPE html&gt;
-  &lt;html lang=&#34;en&#34;&gt;
-<span style=color:#f92672>-    {{- partial &#34;head.html&#34; . -}}
-</span><span style=color:#f92672></span><span style=color:#a6e22e>+    {{- partialCached &#34;head.html&#34; . -}}
-</span></code></pre></div><p>This hack uses a timestamp as part of the new name for css file and this tells <code>Hugo</code> to rebuild on each save, because the name of the css file each time will be different. Usage of <a href=https://gohugo.io/functions/partialcached/><code>partialCached</code></a> instead of regular <code>partial</code> allows for faster build times and instead of rebuilding styles for each <code>partial "head.html"</code> import it will be cached and re-used.</p>
-<p>I thought to myself, is there a way to rebuild styles only on actual change of sources instead.</p>
-<h2 id=question>Question</h2>
-<p>How to rebuild styles only on source change for <code>Hugo</code> project using <code>TailwindCSS</code> configured as <code>PostCSS</code> plugin.</p>
-<h2 id=answer>Answer</h2>
-<p><code>hugo_stats.json</code> works perfectly for this case, we just need to hash it apply as similar hack as above.</p>
-<p>First, we need to enable <a href=https://gohugo.io/getting-started/configuration/#configurebuild><code>writeStats</code></a> in our configuration.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff>diff --git a/path/to/config.toml b/path/to/config.toml
-<span style=color:#f92672>--- a/path/to/config.toml
-</span><span style=color:#f92672></span><span style=color:#a6e22e>+++ b/path/to/config.toml
-</span><span style=color:#a6e22e></span> languageCode = &#34;en-us&#34;
- title = &#34;Blog&#34;
-
-<span style=color:#a6e22e>+[build]
-</span><span style=color:#a6e22e>+# Used for hashing styles in development to work with TailwindCSS&#39;s jit
-</span><span style=color:#a6e22e>+writeStats = true
-</span><span style=color:#a6e22e>+
-</span></code></pre></div><p>After that, we need to update our <code>head.html</code> to read and hash <code>hugo_stats.json</code></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff>diff --git a/path/to/head.html b/path/to/head.html
-<span style=color:#f92672>--- a/path/to/head.html
-</span><span style=color:#f92672></span><span style=color:#a6e22e>+++ b/path/to/head.html
-</span><span style=color:#a6e22e></span>     {{- $css := resources.Get &#34;css/main.css&#34; | resources.PostCSS }}
-     {{- if hugo.IsProduction }}
-<span style=color:#f92672>-        {{- $css = $css | resources.Minify | resources.Fingerprint | resources.PostProcess }}
-</span><span style=color:#f92672>-    {{- else if .Site.IsServer }}
-</span><span style=color:#f92672>-        {{- $css = $css | resources.ExecuteAsTemplate (printf &#34;main.%v.css&#34; now.UnixMilli) . }}
-</span><span style=color:#f92672></span><span style=color:#a6e22e>+        {{- $css = $css | minify | fingerprint | resources.PostProcess }}
-</span><span style=color:#a6e22e>+    {{- else if (and (.Site.IsServer) (fileExists &#34;hugo_stats.json&#34;))  }}
-</span><span style=color:#a6e22e>+        {{- $stats_hash := getJSON &#34;hugo_stats.json&#34; | printf &#34;%v&#34; | sha256 }}
-</span><span style=color:#a6e22e>+        {{- $css = $css | resources.ExecuteAsTemplate (printf &#34;main.%v.css&#34; $stats_hash) . }}
-</span></code></pre></div><p>Here we&rsquo;re using <a href=https://gohugo.io/templates/data-templates/#get-remote-data><code>getJSON</code></a> and converting its contents to string via <code>print</code> and hashing this value with <a href=https://gohugo.io/functions/sha/><code>sha256</code></a></p>
-<h2 id=what-i-learned>What I Learned</h2>
-<p>For some reason, reading <code>hugo_stats.json</code> with <a href=https://gohugo.io/functions/readfile/><code>readFile</code></a> does not work properly for this use case.</p>
-<h2 id=links>Links</h2>
-<ul>
-<li><a href=https://github.com/gohugoio/hugo/issues/8343>https://github.com/gohugoio/hugo/issues/8343</a></li>
-<li><a href=https://gohugo.io/functions/partialcached/>https://gohugo.io/functions/partialcached/</a></li>
-<li><a href=https://gohugo.io/getting-started/configuration/#configure-build>https://gohugo.io/getting-started/configuration/#configure-build</a></li>
-<li><a href=https://gohugo.io/functions/readfile/>https://gohugo.io/functions/readfile/</a></li>
-<li><a href=https://dev.to/jonas_duri/how-to-use-tailwindcss-30-without-external-npm-scripts-just-hugo-pipes-2lg9>https://dev.to/jonas_duri/how-to-use-tailwindcss-30-without-external-npm-scripts-just-hugo-pipes-2lg9</a></li>
-</ul>
-</article>
-</div></body>
-</html>
+text-lg font-bold text-cyan-600" href=/blog/tils/ title=TILs>TILs</a></ul></nav></header><div id=content><article class="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl
+prose-cyan mx-auto"><h1>Hugo | Rebuild Styles on Source Change when using TailwindCSS 3.x</h1><h2 id=story>Story</h2><p>After applying styles rebuild hack provided by <a href=https://github.com/Gioni06>@Gioni06</a>, <a href=https://github.com/nnooney>@nnooney</a> and <a href=https://github.com/istr>@istr</a> in <a href=https://github.com/gohugoio/hugo/issues/8343>this issue</a> and looks like this</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff><span style=display:flex><span>diff --git a/path/to/head.html b/path/to/head.html
+</span></span><span style=display:flex><span><span style=color:#f92672>--- a/path/to/head.html
+</span></span></span><span style=display:flex><span><span style=color:#f92672></span><span style=color:#a6e22e>+++ b/path/to/head.html
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e></span> {{ $styles := resources.Get &#34;css/tw.css&#34; }}
+</span></span><span style=display:flex><span> {{ $styles = $styles | resources.PostCSS }}
+</span></span><span style=display:flex><span> {{ if hugo.IsProduction }}
+</span></span><span style=display:flex><span>     {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
+</span></span><span style=display:flex><span><span style=color:#a6e22e>+{{ else if .Site.IsServer }}
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+    {{ $styles = $styles | resources.ExecuteAsTemplate (printf &#34;main.%v.css&#34; now.UnixMilli) . }}
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e></span> {{ end }}
+</span></span><span style=display:flex><span> &lt;link href=&#34;{{ $styles.RelPermalink }}&#34; rel=&#34;stylesheet&#34; /&gt;
+</span></span><span style=display:flex><span>diff --git a/path/to/baseof.html b/path/to/baseof.html
+</span></span><span style=display:flex><span><span style=color:#f92672>--- a/path/to/baseof.html
+</span></span></span><span style=display:flex><span><span style=color:#f92672></span><span style=color:#a6e22e>+++ b/path/to/baseof.html
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e></span> &lt;!DOCTYPE html&gt;
+</span></span><span style=display:flex><span>  &lt;html lang=&#34;en&#34;&gt;
+</span></span><span style=display:flex><span><span style=color:#f92672>-    {{- partial &#34;head.html&#34; . -}}
+</span></span></span><span style=display:flex><span><span style=color:#f92672></span><span style=color:#a6e22e>+    {{- partialCached &#34;head.html&#34; . -}}
+</span></span></span></code></pre></div><p>This hack uses a timestamp as part of the new name for css file and this tells <code>Hugo</code> to rebuild on each save, because the name of the css file each time will be different. Usage of <a href=https://gohugo.io/functions/partialcached/><code>partialCached</code></a> instead of regular <code>partial</code> allows for faster build times and instead of rebuilding styles for each <code>partial "head.html"</code> import it will be cached and re-used.</p><p>I thought to myself, is there a way to rebuild styles only on actual change of sources instead.</p><h2 id=question>Question</h2><p>How to rebuild styles only on source change for <code>Hugo</code> project using <code>TailwindCSS</code> configured as <code>PostCSS</code> plugin.</p><h2 id=answer>Answer</h2><p><code>hugo_stats.json</code> works perfectly for this case, we just need to hash it apply as similar hack as above.</p><p>First, we need to enable <a href=https://gohugo.io/getting-started/configuration/#configurebuild><code>writeStats</code></a> in our configuration.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff><span style=display:flex><span>diff --git a/path/to/config.toml b/path/to/config.toml
+</span></span><span style=display:flex><span><span style=color:#f92672>--- a/path/to/config.toml
+</span></span></span><span style=display:flex><span><span style=color:#f92672></span><span style=color:#a6e22e>+++ b/path/to/config.toml
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e></span> languageCode = &#34;en-us&#34;
+</span></span><span style=display:flex><span> title = &#34;Blog&#34;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>+[build]
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+# Used for hashing styles in development to work with TailwindCSS&#39;s jit
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+writeStats = true
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+
+</span></span></span></code></pre></div><p>After that, we need to update our <code>head.html</code> to read and hash <code>hugo_stats.json</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff><span style=display:flex><span>diff --git a/path/to/head.html b/path/to/head.html
+</span></span><span style=display:flex><span><span style=color:#f92672>--- a/path/to/head.html
+</span></span></span><span style=display:flex><span><span style=color:#f92672></span><span style=color:#a6e22e>+++ b/path/to/head.html
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e></span>     {{- $css := resources.Get &#34;css/main.css&#34; | resources.PostCSS }}
+</span></span><span style=display:flex><span>     {{- if hugo.IsProduction }}
+</span></span><span style=display:flex><span><span style=color:#f92672>-        {{- $css = $css | resources.Minify | resources.Fingerprint | resources.PostProcess }}
+</span></span></span><span style=display:flex><span><span style=color:#f92672>-    {{- else if .Site.IsServer }}
+</span></span></span><span style=display:flex><span><span style=color:#f92672>-        {{- $css = $css | resources.ExecuteAsTemplate (printf &#34;main.%v.css&#34; now.UnixMilli) . }}
+</span></span></span><span style=display:flex><span><span style=color:#f92672></span><span style=color:#a6e22e>+        {{- $css = $css | minify | fingerprint | resources.PostProcess }}
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+    {{- else if (and (.Site.IsServer) (fileExists &#34;hugo_stats.json&#34;))  }}
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+        {{- $stats_hash := getJSON &#34;hugo_stats.json&#34; | printf &#34;%v&#34; | sha256 }}
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+        {{- $css = $css | resources.ExecuteAsTemplate (printf &#34;main.%v.css&#34; $stats_hash) . }}
+</span></span></span></code></pre></div><p>Here we&rsquo;re using <a href=https://gohugo.io/templates/data-templates/#get-remote-data><code>getJSON</code></a> and converting its contents to string via <code>print</code> and hashing this value with <a href=https://gohugo.io/functions/sha/><code>sha256</code></a></p><h2 id=what-i-learned>What I Learned</h2><p>For some reason, reading <code>hugo_stats.json</code> with <a href=https://gohugo.io/functions/readfile/><code>readFile</code></a> does not work properly for this use case.</p><h2 id=links>Links</h2><ul><li><a href=https://github.com/gohugoio/hugo/issues/8343>https://github.com/gohugoio/hugo/issues/8343</a></li><li><a href=https://gohugo.io/functions/partialcached/>https://gohugo.io/functions/partialcached/</a></li><li><a href=https://gohugo.io/getting-started/configuration/#configure-build>https://gohugo.io/getting-started/configuration/#configure-build</a></li><li><a href=https://gohugo.io/functions/readfile/>https://gohugo.io/functions/readfile/</a></li><li><a href=https://dev.to/jonas_duri/how-to-use-tailwindcss-30-without-external-npm-scripts-just-hugo-pipes-2lg9>https://dev.to/jonas_duri/how-to-use-tailwindcss-30-without-external-npm-scripts-just-hugo-pipes-2lg9</a></li></ul></article></div></body></html>

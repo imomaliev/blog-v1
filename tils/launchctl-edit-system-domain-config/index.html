@@ -1,55 +1,8 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<link rel=icon href=/favicon.ico>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<title>Blog</title>
-<link rel=stylesheet href="/blog/css/main.min.0a1265f87d82ecc5f08f9855f888f820ab77c67e51ba121bafdccbb5c3ddae79.css">
-</head>
-<body><header>
-<nav>
-<ul>
-<a class="text-lg font-bold text-cyan-600" href=/blog/ title=Blog>Blog</a>
+<!doctype html><html lang=en><head><meta charset=utf-8><link rel=icon href=/favicon.ico><meta name=viewport content="width=device-width,initial-scale=1"><title>Blog</title><link rel=stylesheet href="/blog/css/main.min.0a1265f87d82ecc5f08f9855f888f820ab77c67e51ba121bafdccbb5c3ddae79.css"></head><body><header><nav><ul><a class="text-lg font-bold text-cyan-600" href=/blog/ title=Blog>Blog</a>
 |
 <a class="underline
-text-lg font-bold text-cyan-600" href=/blog/tils/ title=TILs>TILs</a>
-</ul>
-</nav>
-</header>
-<div id=content>
-<article class="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl
-prose-cyan mx-auto">
-<h1>Launchctl | Edit System Domain Config</h1>
-<h2 id=question>Question</h2>
-<p>I messed up my launchctl configs while I was trying to disable FortiClient from starting on startup. I tried to use <code>launchctl disable ...</code> for services but ended up adding wrong entries to disable configuration.</p>
-<h2 id=answer>Answer</h2>
-<p>Edit <code>/private/var/db/com.apple.xpc.launchd/disabled*</code> files and delete wrong data</p>
-<h2 id=what-i-learned>What I Learned</h2>
-<ol>
-<li>
-<p>How to login to single-user mode on macOS.</p>
-<blockquote>
-<p>Press <code>Command-S</code> on system boot</p>
-</blockquote>
-</li>
-<li>
-<p>Make data editable because in single user it is mounted as readonly</p>
-<p>In single-user mode run</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console>$ cd /
-$ mount -uw /System/Volumes/Data
-</code></pre></div></li>
-<li>
-<p>After macOS Catalina launched the mount mechanism changed and split between system data and user data. This why now we use <code>mount ...</code> from previous point, but before that you mounted whole system</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console>$ /sbin/mount -uw /
-</code></pre></div></li>
-</ol>
-<h2 id=links>Links</h2>
-<ul>
-<li><a href=https://eclecticlight.co/2019/10/08/macos-catalina-boot-volume-layout/>https://eclecticlight.co/2019/10/08/macos-catalina-boot-volume-layout/</a></li>
-<li><a href=https://apple.stackexchange.com/questions/375603/catalina-not-allowing-to-change-read-write-permissions-despite-having-sip-disabl>https://apple.stackexchange.com/questions/375603/catalina-not-allowing-to-change-read-write-permissions-despite-having-sip-disabl</a></li>
-<li><a href=https://apple.stackexchange.com/questions/388469/unable-to-mount-read-write-in-os-catalina-10-15-4-in-single-user-mode>https://apple.stackexchange.com/questions/388469/unable-to-mount-read-write-in-os-catalina-10-15-4-in-single-user-mode</a></li>
-<li><a href=https://stackoverflow.com/questions/31206756/launchctl-remove-enabled-disabled-override>https://stackoverflow.com/questions/31206756/launchctl-remove-enabled-disabled-override</a></li>
-</ul>
-</article>
-</div></body>
-</html>
+text-lg font-bold text-cyan-600" href=/blog/tils/ title=TILs>TILs</a></ul></nav></header><div id=content><article class="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl
+prose-cyan mx-auto"><h1>Launchctl | Edit System Domain Config</h1><h2 id=question>Question</h2><p>I messed up my launchctl configs while I was trying to disable FortiClient from starting on startup. I tried to use <code>launchctl disable ...</code> for services but ended up adding wrong entries to disable configuration.</p><h2 id=answer>Answer</h2><p>Edit <code>/private/var/db/com.apple.xpc.launchd/disabled*</code> files and delete wrong data</p><h2 id=what-i-learned>What I Learned</h2><ol><li><p>How to login to single-user mode on macOS.</p><blockquote><p>Press <code>Command-S</code> on system boot</p></blockquote></li><li><p>Make data editable because in single user it is mounted as readonly</p><p>In single-user mode run</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console><span style=display:flex><span>$ cd /
+</span></span><span style=display:flex><span>$ mount -uw /System/Volumes/Data
+</span></span></code></pre></div></li><li><p>After macOS Catalina launched the mount mechanism changed and split between system data and user data. This why now we use <code>mount ...</code> from previous point, but before that you mounted whole system</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console><span style=display:flex><span>$ /sbin/mount -uw /
+</span></span></code></pre></div></li></ol><h2 id=links>Links</h2><ul><li><a href=https://eclecticlight.co/2019/10/08/macos-catalina-boot-volume-layout/>https://eclecticlight.co/2019/10/08/macos-catalina-boot-volume-layout/</a></li><li><a href=https://apple.stackexchange.com/questions/375603/catalina-not-allowing-to-change-read-write-permissions-despite-having-sip-disabl>https://apple.stackexchange.com/questions/375603/catalina-not-allowing-to-change-read-write-permissions-despite-having-sip-disabl</a></li><li><a href=https://apple.stackexchange.com/questions/388469/unable-to-mount-read-write-in-os-catalina-10-15-4-in-single-user-mode>https://apple.stackexchange.com/questions/388469/unable-to-mount-read-write-in-os-catalina-10-15-4-in-single-user-mode</a></li><li><a href=https://stackoverflow.com/questions/31206756/launchctl-remove-enabled-disabled-override>https://stackoverflow.com/questions/31206756/launchctl-remove-enabled-disabled-override</a></li></ul></article></div></body></html>
